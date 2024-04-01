@@ -1,0 +1,10 @@
+{
+    ShowVar;
+    var1=5;
+    {
+        var2 = 3;
+        var1 = 2;
+        ShowVar;
+    }
+    ShowVar;
+}

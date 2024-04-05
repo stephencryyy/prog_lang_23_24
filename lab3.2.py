@@ -57,11 +57,33 @@ class interpreter:
 
     def poland_notation(self, string):
         try:
+            str = ''
             out = []
             stack = []
             for i in range(len(string)):
                 if string[i].isalpha() or string[i].isdigit():
-                    out.append(string[i])
+                    if i != 0:
+                        if not string[i - 1].isdigit() and not string[i - 1].isalpha():
+                            for j in range(i, len(string)):
+                                if string[j].isalpha() or string[j].isdigit():
+                                    str += string[j]
+                                else:
+                                    break
+                            out.append(str)
+                            str = ''
+
+                        else:
+                            continue
+                    else:
+                        for j in range(i, len(string)):
+                            if string[j].isalpha() or string[j].isdigit():
+                                str += string[j]
+                            else:
+                                break
+                        out.append(str)
+                        str = ''
+
+
                 elif string[i] == '(':
                     stack.append('(')
                 elif string[i] == ')':
@@ -88,7 +110,7 @@ class interpreter:
                     out.append(stack.pop())
 
 
-            return ''.join(out)
+            return out
 
         except Exception as e:
             print('Exception is ', e)
@@ -103,7 +125,7 @@ class interpreter:
                 elif string[i] == '+':
                     stack.append(stack.pop() + stack.pop())
                 elif string[i] == '-':
-                    stack.append(-stack.pop() + stack.pop())
+                    stack.append(stack.pop()-stack.pop())
                 elif string[i] == '*':
                     stack.append(stack.pop() * stack.pop())
                 elif string[i] == '/':
@@ -154,4 +176,4 @@ class interpreter:
 inter = interpreter()
 
 inter.parce('lab3.2.txt')
-print(inter.calc(inter.poland_notation('(2+4+5)*4-5')))
+

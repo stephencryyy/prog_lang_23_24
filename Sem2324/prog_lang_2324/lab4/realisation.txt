@@ -1,0 +1,5 @@
+in(Var_1);
+in(Var_2)
+Var_3=add(Var_2,not(121))
+
+print(Var_3)
